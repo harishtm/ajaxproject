@@ -1,0 +1,33 @@
+<html>
+<body>
+
+    <a href="{% url 'student_list_view' %}">Back</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <!--th>Action</th-->
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>{{st.name}}</td>
+                <td>{{st.age}}</td>
+                <td>{{st.address}}</td>
+                <td>{{st.phone}}</td>
+                <!--td>
+                    <a href="{% url 'student_edit_view' st.pk %}">Edit</a> |
+                    <a href="{% url 'student_detail_view' st.pk %}">View</a> |
+                    <a href="#">Delete</a>
+                </td-->
+            </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

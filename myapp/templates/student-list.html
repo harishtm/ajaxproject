@@ -1,0 +1,37 @@
+<html>
+<body>
+
+<form action="/student-list/" method="get">
+<input type="text" name="search" placeholder="Enter Student Name">
+<input type="submit" value="Search Student">
+</form>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for st in student_list %}
+            <tr>
+                <td>{{st.name}}</td>
+                <td>{{st.age}}</td>
+                <td>{{st.address}}</td>
+                <td>{{st.phone}}</td>
+                <td>
+                    <a href="{% url 'student_edit_view' st.pk %}">Edit</a> |
+                    <a href="{% url 'student_detail_view' st.pk %}">View</a> |
+                    <a href="{% url 'student_delete' st.pk%}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

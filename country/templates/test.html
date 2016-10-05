@@ -1,0 +1,57 @@
+<html>
+<head>
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script>
+$(function(){
+
+    $('#id_country').change(function(){
+        var cid = $(this).val();
+        if(cid)
+        {
+            $.ajax({
+                url : '/get-states/',
+                type : 'GET',
+                data :{'cid':cid},
+                success:function(data){
+                    if (data)
+                    {
+                        $('#id_state option').remove()
+                        $('<option>', {value : ''}).html('-------').appendTo('#id_state');
+                        var res = data.res
+                        $('#id_county').show();
+                        for (i=0;i<res.length;i++)
+                        {
+                            $('<option>', {value : res[i].id }).html(res[i].name).appendTo('#id_state');
+                        }
+                    }
+                }
+            });
+        }
+
+    })
+
+})
+</script>
+
+
+</head>
+<body>
+
+<h1>Welcome</h1>
+
+<select id="id_country">
+<option value="">Select Country</option>
+{% for i in country_list %}
+<option value="{{i.id}}">{{i.name}}</option>
+{% endfor %}
+</select>
+
+
+<select id="id_state">
+<option></option>
+</select>
+
+
+
+</body>
+</html>

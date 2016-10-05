@@ -1,0 +1,53 @@
+<html>
+<title> Django-AngularJS</title>
+<script src="/static/js/angular.min.js"></script>
+<script src="/static/js/angularfilter.js"></script>
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script>
+//console.log({{all_student_list|safe}})
+var stdata = {{all_student_list|safe}};
+var all_student_data = []
+$.each(stdata,function(k,v){
+    //console.log(v.pk)
+    var obj = v.fields;
+    obj.pk = v.pk
+    all_student_data.push(obj)
+});
+</script>
+
+
+<body ng-app="myfilter">
+
+<div ng-controller="student-data">
+
+    <input type="text" ng-model="searchStudentName" placeholder="Enter Student Name">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr ng-repeat="st in AllStudentList | filter : searchStudentName">
+                    <td>[[ st.name ]]</td>
+                    <td>[[ st.age ]]</td>
+                    <td>[[ st.address ]]</td>
+                    <td>[[ st.phone ]]</td>
+                    <td>
+                        <a href="/edit-student/[[st.pk]]/">Edit</a> |
+                        <a href="/student-detail/[[st.pk]]/">View</a> |
+                        <a href="/delete-student/[[st.pk]]/">Delete</a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>
